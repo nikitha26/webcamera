@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <title> web camera using javascript</title>
+</head>
+<body>
+   <video id="video" style="height:200px;width:200px;border:3px solid black;">  </video>
+   <canvas id="canvas"> </canvas><br>
+   <button onclick="click();">click</button>
+</body>
+<script type="text/javascript" src="webcamjs/webcam.min.js">
+    var video=document.getElementById('video');
+    var canvas=document.getElementById('canvas');
+    var context=canvas.getContext('2d');
+
+     navigator.getUserMedia =navigator.getUserMedia ||navigator.webkitGetUserMedia ||navigator.mozGetUserMedia ||navigator.msGetUserMedia
+
+    if(navigator.getUserMedia)
+    {
+        navigator.getUserMedia({video:true}, success ,failure);
+    }
+    function success (stream)
+    {
+      video.src=window.URL.createObjectURL(stream);
+    
+    }
+    
+    function failure (e)
+    {
+        alert(e.name)
+    }
+    
+    function click()
+    {
+        canvas.width=video.clientWidth;
+        canvas.height=video.clientHeight;
+        context.drawImage(video,0,0)
+    }
+</script>
+</html>
